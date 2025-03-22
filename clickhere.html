@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Portal Button</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a1a;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+        }
+
+        .portal-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .magic-button {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            background: #ece92f;
+            
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: all 0.5s;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+         
+        }
+        
+
+        .magic-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            
+            background: conic-gradient(
+                #ff0000, #ff7300, #fffb00, #48ff00,
+                #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000
+            );
+            animation: rotate 3s linear infinite;
+            opacity: 0.3;
+            mix-blend-mode: screen;
+        }
+
+        .magic-button:hover {
+            transform: rotateX(15deg) rotateY(15deg) scale(1.1);
+            box-shadow: 0 0 50px rgba(187, 236, 213, 0.8);
+            background-image: image();
+        }
+
+        .magic-button:active {
+            transform: scale(0.95);
+        }
+
+        .magic-button span {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(45deg, #9cface, #00b3ff);
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        a{
+            text-decoration: none
+            ;
+        }
+        .portal-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: rgba(0, 255, 136, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: portal 1s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes portal {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(50); opacity: 0; }
+        }
+
+        .glitch-text {
+            position: fixed;
+            top: 20px;
+            color: #00ff88;
+            animation: glitch 2s infinite;
+            opacity: 0;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container">
+        <a href="index.html">
+        <button class="magic-button" onclick=" index2.html"> 
+            <span>⟡ Discover My Simple Intro ⟡</span>
+        </a>
+        </button>
+    </div>
+
+    <script>
+        function activatePortal() {
+            // Create portal effect
+            const portal = document.createElement('div');
+            portal.className = 'portal-effect';
+            document.body.appendChild(portal);
+
+            // Create glitch text
+            const glitch = document.createElement('div');
+            glitch.className = 'glitch-text';
+            glitch.textContent = 'DIMENSIONAL TRANSITION INITIATED';
+            document.body.appendChild(glitch);
+            
+            // Audio effects (optional - add sound file)
+            // const audio = new Audio('portal_sound.mp3');
+            // audio.play();
+
+            // Animate button
+            const button = document.querySelector('.magic-button');
+            button.style.transform = 'scale(0.9) rotateX(30deg)';
+            button.style.opacity = '0.5';
+
+            // Glitch animation
+            glitch.style.opacity = '1';
+            setTimeout(() => glitch.style.opacity = '0', 1000);
+
+            // Navigate after animation
+            setTimeout(() => {
+                window.location.href = 'https://example.com'; // Replace with your URL
+            }, 1500);
+
+            // Prevent multiple clicks
+            button.removeAttribute('onclick');
+        }
+
+        // Add random binary rain effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = '100%';
+            container.style.pointerEvents = 'none';
+            
+            for (let i = 0; i < 50; i++) {
+                const binary = document.createElement('div');
+                binary.textContent = Math.random().toString(2).substr(2, 8);
+                binary.style.position = 'absolute';
+                binary.style.left = `${Math.random() * 100}%`;
+                binary.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
+                binary.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                binary.style.opacity = '0.3';
+                container.appendChild(binary);
+            }
+            
+            document.body.appendChild(container);
+        });
+
+        // Add falling animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                from { transform: translateY(-100%); }
+                to { transform: translateY(100vh); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
